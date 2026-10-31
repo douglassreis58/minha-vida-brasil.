@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#102d28">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Minha Vida Brasil</title>
+<style>
+:root{--ink:#17251f;--muted:#66766e;--green:#153c32;--green2:#287054;--gold:#efbd62;--line:#e0e9e2;--card:#ffffffed}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#eaf1eb;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(160deg,#0d2928 0%,#1b5948 36%,#86b99a 75%,#e7d9a8 100%)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;opacity:.22;background-image:radial-gradient(circle at 12% 18%,#fff 0 2px,transparent 3px),radial-gradient(circle at 80% 12%,#fff 0 1px,transparent 2px),linear-gradient(120deg,transparent 55%,#fff2 55.2%,transparent 56%);background-size:90px 90px,130px 130px,100% 100%}
+header{color:white;padding:24px 18px 20px;background:linear-gradient(115deg,#102d28f2,#1c5b45e8);border-bottom:1px solid #ffffff30;box-shadow:0 8px 30px #09221d40}
+.wrap{max-width:650px;margin:auto}.kicker{font-size:10px;letter-spacing:2px;font-weight:900;color:#c9e7d4}.brand{font-size:26px;font-weight:950;letter-spacing:-.7px;margin:4px 0}.subtitle{font-size:12px;color:#d7eadf}
+main{max-width:650px;margin:auto;padding:14px 13px 38px}.card{background:var(--card);backdrop-filter:blur(9px);border:1px solid #ffffffa8;border-radius:19px;padding:16px;margin:12px 0;box-shadow:0 9px 28px #102d281c}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.muted{color:var(--muted);font-size:12px}.big{font-size:27px;font-weight:900}.name{font-size:23px;font-weight:900}.pill{font-size:10px;background:#e8f3eb;color:#24563d;padding:5px 9px;border-radius:30px;font-weight:900}
+h2{font-size:16px;margin:0 0 12px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#f3f7f3;border:1px solid #e7eee8;border-radius:12px;padding:10px}.stat label{font-size:11px;color:var(--muted)}.stat strong{display:block;font-size:17px;margin:3px 0}.bar{height:7px;background:#e2eae3;border-radius:20px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#2a8b61,#8acb8d);border-radius:20px}
+button{border:0;border-radius:12px;padding:13px 11px;font-size:13px;font-weight:800;cursor:pointer;background:var(--green);color:white;width:100%;margin:4px 0;box-shadow:0 3px 8px #102d2814}
+button.secondary{background:#edf5ef;color:#1b4c36;border:1px solid #dce9df;box-shadow:none}button.gold{background:linear-gradient(110deg,#efbd62,#e5a33d);color:#38250b}button:disabled{opacity:.4}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.event{background:#f2f7f2;border-left:4px solid #2d8b61;padding:12px;border-radius:10px;font-size:13px;line-height:1.5}
+.log{font-size:12px;padding:9px 0;border-bottom:1px solid var(--line)}.log:last-child{border:0}
+input,select{width:100%;padding:12px;border:1px solid #cfdad1;border-radius:10px;font-size:16px;margin:6px 0 12px;background:#fff}
+.career-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.career{border:1px solid #dce8df;background:#f6faf6;border-radius:13px;padding:11px;text-align:left;color:var(--ink);box-shadow:none;margin:0}.career b{display:block;font-size:13px}.career small{display:block;color:var(--muted);font-size:10px;margin-top:4px;line-height:1.35}.career .emoji{font-size:22px;display:block;margin-bottom:5px}
+.notice{font-size:11px;color:var(--muted);line-height:1.5}.hidden{display:none!important}footer{text-align:center;color:#e4f1e7;font-size:10px;padding:10px;text-shadow:0 1px 3px #123}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="kicker">SIMULADOR DE VIDA • BRASIL 🇧🇷</div><div class="brand">MINHA VIDA BRASIL</div><div class="subtitle">Sua história. Suas escolhas. Seu futuro.</div></div></header>
+<main>
+<section id="create" class="card">
+<h2>✨ Comece uma nova vida</h2>
+<label class="muted" for="playerName">Nome do personagem</label><input id="playerName" maxlength="22" value="Douglas" placeholder="Digite um nome">
+<label class="muted" for="gender">Personagem</label><select id="gender"><option>Masculino</option><option>Feminino</option></select>
+<label class="muted" for="city">Cidade onde nasceu</label><input id="city" maxlength="30" value="Nova Esperança do Piriá" placeholder="Sua cidade">
+<button onclick="newGame()">COMEÇAR MINHA VIDA ▶</button><p class="notice">Sua partida fica salva neste navegador, neste aparelho.</p>
+</section>
+<section id="game" class="hidden">
+<div class="card">
+<div class="row"><span class="pill" id="yearPill">ANO 2010</span><span class="muted" id="cityLabel">Brasil 🇧🇷</span></div>
+<div class="name" id="heroName">Douglas</div><div class="muted" id="ageLabel">0 anos • Primeira infância</div>
+<div class="row" style="margin-top:13px"><div><div class="muted">💰 Dinheiro</div><div class="big" id="money">R$ 0</div></div><div style="text-align:right"><div class="muted">⭐ Carreira</div><strong id="job">Nenhuma</strong></div></div>
+</div>
+<div class="card"><h2>📊 Atributos</h2><div class="stats" id="stats"></div></div>
+<div class="card"><h2>📰 Acontecimento da vida</h2><div class="event" id="story"></div></div>
+<div class="card"><h2>🎯 O que deseja fazer?</h2><div class="actions">
+<button class="secondary" onclick="action('family')">👨‍👩‍👦 Família</button><button class="secondary" onclick="action('learn')">📚 Estudar</button>
+<button class="secondary" onclick="action('play')">🧸 Lazer</button><button class="secondary" onclick="action('friends')">🧑‍🤝‍🧑 Amigos</button>
+<button class="secondary" onclick="action('outing')">🚗 Passear</button><button class="secondary" onclick="action('train')">🏃 Treinar talento</button>
+</div></div>
+<div class="card"><div class="row"><h2>🌟 Carreiras e profissões</h2><span class="pill" id="careerStatus">Bloqueadas</span></div>
+<p class="notice" id="careerIntro">Quando Douglas crescer, poderá escolher um caminho profissional. Algumas carreiras exigem estudo, prática ou testes.</p>
+<div id="careerGrid" class="career-grid"></div><div id="careerActions" class="hidden"><div class="event" id="careerStory"></div><button class="secondary" onclick="careerTry()">🎬 Fazer teste / trabalhar na carreira</button><button class="secondary" onclick="leaveCareer()">Trocar de carreira</button></div>
+</div>
+<div class="card"><h2>🎂 Próximo capítulo</h2><p class="notice">Cada ano traz novas fases, oportunidades e acontecimentos.</p><button class="gold" onclick="ageUp()">AVANÇAR 1 ANO ▶</button></div>
+<div class="card"><div class="row"><h2>📜 Histórico da vida</h2><button class="secondary" style="width:auto;padding:7px 10px;font-size:11px" onclick="resetGame()">Reiniciar</button></div><div id="history"></div></div>
+</section>
+<footer>MINHA VIDA BRASIL • PROTÓTIPO 0.2 • FEITO PARA JOGAR NO CELULAR</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);let p=null;
+const careers=[
+{id:'actor',emoji:'🎬',name:'Ator / atriz',desc:'Audições, novelas, filmes e fama',min:16,skill:'intel',pay:900},
+{id:'football',emoji:'⚽',name:'Jogador(a) de futebol',desc:'Treinos, peneiras e grandes clubes',min:15,skill:'health',pay:1200},
+{id:'singer',emoji:'🎤',name:'Cantor(a)',desc:'Música, shows e reconhecimento',min:16,skill:'happy',pay:800},
+{id:'influencer',emoji:'📱',name:'Influenciador(a)',desc:'Criar conteúdo e conquistar público',min:15,skill:'friends',pay:650},
+{id:'doctor',emoji:'🩺',name:'Médico(a)',desc:'Estudo e carreira na saúde',min:23,skill:'intel',pay:1800},
+{id:'entrepreneur',emoji:'🏢',name:'Empresário(a)',desc:'Criar e administrar negócios',min:18,skill:'intel',pay:1300},
+{id:'teacher',emoji:'📚',name:'Professor(a)',desc:'Ensinar e transformar vidas',min:21,skill:'intel',pay:1000},
+{id:'chef',emoji:'👨‍🍳',name:'Chef de cozinha',desc:'Criatividade e gastronomia',min:18,skill:'happy',pay:850},
+{id:'designer',emoji:'🎨',name:'Designer',desc:'Criar marcas, artes e projetos',min:18,skill:'intel',pay:950},
+{id:'police',emoji:'🛡️',name:'Policial',desc:'Serviço público e formação',min:18,skill:'health',pay:1100}
+];
+function save(){localStorage.setItem('minhaVidaBrasilSave',JSON.stringify(p));render()}
+function load(){try{p=JSON.parse(localStorage.getItem('minhaVidaBrasilSave'))}catch(e){p=null}if(p){p.career=p.career||null;p.fame=p.fame||0;p.training=p.training||0;$('create').classList.add('hidden');$('game').classList.remove('hidden');render()}}
+function newGame(){let name=$('playerName').value.trim();if(!name){alert('Digite um nome.');return}p={name,gender:$('gender').value,city:$('city').value.trim()||'Brasil',age:0,year:2010,money:0,job:'Nenhuma',school:'Ainda não começou',house:'Casa dos pais',health:100,happy:100,intel:50,family:100,friends:0,career:null,fame:0,training:0,story:`${name} nasceu no Brasil. Sua família está muito feliz!`,history:[`2010 — ${name} nasceu em ${$('city').value||'Brasil'}.`]};$('create').classList.add('hidden');$('game').classList.remove('hidden');save()}
+function stage(){if(p.age<3)return'Primeira infância';if(p.age<6)return'Infância';if(p.age<12)return'Infância escolar';if(p.age<18)return'Adolescência';if(p.age<60)return'Vida adulta';return'Maturidade'}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function stat(label,key){let v=p[key];return `<div class="stat"><label>${label}</label><strong>${v}%</strong><div class="bar"><i style="width:${v}%"></i></div></div>`}
+function render(){if(!p)return;$('yearPill').textContent='ANO '+p.year;$('cityLabel').textContent=p.city+' 🇧🇷';$('heroName').textContent=p.name;$('ageLabel').textContent=p.age+' anos • '+stage();$('money').textContent='R$ '+p.money.toLocaleString('pt-BR');$('job').textContent=p.job;$('stats').innerHTML=stat('❤️ Saúde','health')+stat('😊 Felicidade','happy')+stat('🧠 Inteligência','intel')+stat('👨‍👩‍👦 Família','family')+stat('🧑‍🤝‍🧑 Amizades','friends')+`<div class="stat"><label>🌟 Fama</label><strong>${p.fame}%</strong><div class="bar"><i style="width:${p.fame}%"></i></div></div>`;$('story').textContent=p.story;$('history').innerHTML=p.history.slice(0,14).map(x=>`<div class="log">${esc(x)}</div>`).join('');renderCareers()}
+function note(s){p.story=s;p.history.unshift(p.year+' — '+s);p.history=p.history.slice(0,40);save()}
+function clamp(k,n){p[k]=Math.max(0,Math.min(100,p[k]+n))}
+function action(a){if(a==='family'){clamp('happy',5);clamp('family',4);note(p.name+' passou um dia especial com a família.')}
+if(a==='learn'){clamp('intel',5);clamp('happy',1);note(p.name+' dedicou um tempo aos estudos e aprendeu algo novo.')}
+if(a==='play'){clamp('happy',5);clamp('health',1);note(p.name+' aproveitou o tempo livre para se divertir.')}
+if(a==='friends'){if(p.age<3){clamp('happy',2);note(p.name+' brincou com pessoas da família.')}else{clamp('friends',7);clamp('happy',3);note(p.name+' conheceu pessoas e fortaleceu amizades.')}}
+if(a==='outing'){if(p.money>=10){p.money-=10;clamp('happy',5);note(p.name+' saiu para passear e gastou R$ 10.')}else{clamp('happy',2);note(p.name+' fez um passeio simples pela cidade.')}}
+if(a==='train'){if(p.age<8){clamp('health',2);clamp('happy',2);p.training+=1;note(p.name+' brincou e desenvolveu coordenação e criatividade.')}else{clamp('health',3);p.training+=2;note(p.name+' treinou com dedicação. A experiência pode ajudar em algumas carreiras.')}}}
+function renderCareers(){let available=careers.filter(c=>p.age>=c.min);$('careerStatus').textContent=p.career?p.career.name:(available.length?'Oportunidades abertas':'A partir da adolescência');$('careerIntro').textContent=p.age<15?'Continue crescendo, estudando e desenvolvendo seus talentos. As carreiras aparecem conforme a idade.': 'Escolha uma carreira para começar. Algumas exigem mais estudo ou atributos.';if(p.career){$('careerGrid').classList.add('hidden');$('careerActions').classList.remove('hidden');$('careerStory').textContent=p.career.message||'Você está construindo sua carreira. Treine e tente novas oportunidades!';return}
+$('careerActions').classList.add('hidden');$('careerGrid').classList.remove('hidden');$('careerGrid').innerHTML=available.length?available.map(c=>`<button class="career" onclick="chooseCareer('${c.id}')"><span class="emoji">${c.emoji}</span><b>${c.name}</b><small>${c.desc}</small><small>A partir de ${c.min} anos</small></button>`).join(''):'<div class="notice" style="grid-column:1/-1">Ainda não há carreiras disponíveis para esta idade. Avance os anos!</div>'}
+function chooseCareer(id){let c=careers.find(x=>x.id===id);if(!c||p.age<c.min)return;p.career={...c,level:0,message:'Você escolheu '+c.name+'. Agora é hora de se preparar e buscar sua primeira oportunidade!'};p.job=c.name;note(p.name+' decidiu seguir carreira como '+c.name+'.')}
+function careerTry(){if(!p.career)return;let c=p.career;let score=(p[c.skill]||0)+p.training*2+Math.random()*35;let success=score>=65; if(success){c.level++;let pay=c.pay*(1+Math.floor(c.level/3)*0.5);p.money+=Math.round(pay);clamp('happy',5);if(['actor','football','singer','influencer'].includes(c.id)){clamp('fame',c.level>=4?12:5)}c.message=successText(c,c.level);note(c.message+' Você recebeu R$ '+Math.round(pay).toLocaleString('pt-BR')+' fictícios.')}else{clamp('happy',-3);c.message='Desta vez a oportunidade não deu certo. Continue treinando, estudando e tente novamente.';note(c.message)}}
+function successText(c,l){let stages={actor:['Você conseguiu um pequeno papel em uma produção!','Seu trabalho chamou atenção e você participou de uma novela.','Você ganhou destaque em um filme e ficou conhecido!','Você se tornou um ator muito famoso no país!'],football:['Você passou em uma avaliação e entrou em uma equipe de base!','Você estreou em um clube profissional!','Você foi destaque no campeonato e recebeu uma proposta importante!','Você virou estrela do futebol brasileiro!'],singer:['Você fez sua primeira apresentação!','Uma música sua começou a ganhar público!','Você realizou shows para muita gente!','Você se tornou um cantor famoso!'],influencer:['Seu conteúdo conquistou os primeiros seguidores!','Sua comunidade cresceu bastante!','Marcas começaram a reconhecer seu trabalho!','Você virou um influenciador muito famoso!']};let arr=stages[c.id];if(arr)return arr[Math.min(l-1,3)];return 'Você avançou na carreira de '+c.name+' e conquistou mais experiência!'}
+function leaveCareer(){if(confirm('Deseja sair desta carreira?')){p.career=null;p.job='Nenhuma';note(p.name+' decidiu buscar um novo caminho profissional.')}}
+function ageUp(){if(p.age>=100){note(p.name+' chegou aos 100 anos. Sua jornada está completa!');return}p.age++;p.year++;clamp('health',-1);clamp('happy',-1);clamp('intel',1);let s='';if(p.age===1)s=p.name+' completou 1 ano! Está descobrindo o mundo.';else if(p.age===5)s=p.name+' está crescendo e se preparando para a escola.';else if(p.age===6){p.school='Ensino fundamental';s=p.name+' começou a estudar!';}else if(p.age===12){p.school='Ensino fundamental II';s=p.name+' entrou em uma nova fase escolar.';}else if(p.age===15)s=p.name+' chegou à adolescência. Novos sonhos e caminhos começam a aparecer.';else if(p.age===18){p.school='Ensino médio concluído';s=p.name+' chegou à vida adulta! As oportunidades profissionais estão abertas.';}else if(p.age===22){p.money+=500;s=p.name+' conseguiu uma oportunidade de trabalho temporário e recebeu R$ 500 fictícios.';}else if(p.age%5===0)s=p.name+' completou '+p.age+' anos. Um novo capítulo começa.';else s=p.name+' viveu mais um ano e teve novas experiências.';note(s)}
+function resetGame(){if(confirm('Apagar a partida salva e começar de novo?')){localStorage.removeItem('minhaVidaBrasilSave');p=null;$('game').classList.add('hidden');$('create').classList.remove('hidden')}}
+load();
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {})); }
+</script>
+</body></html>
